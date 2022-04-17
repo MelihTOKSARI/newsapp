@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="news_api_key">c6092e52d0d34641b1782ed886a72bb4</string>
+
     <string name="title_news">News</string>
     <string name="title_favourites">Favourites</string>
     <string name="title_notifications">Notifications</string>
 
     <string name="description_news">News Fragment</string>
     <string name="description_favourites">Favourites Fragment</string>
+
+    <string name="message_search_news">Please search news by typing above area</string>
+    <string name="message_news_not_found">Sorry, we cannot find any news about your search</string>
+    <string name="hint_search_area">Search news…</string>
+
+    <string name="desc_news_image">Image</string>
 </resources>

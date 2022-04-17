@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/news_card_height"
+    android:layout_margin="@dimen/card_margin_default"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="@dimen/radius_default">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/news_content_container_padding">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/iv_news_image"
+            android:layout_marginEnd="@dimen/news_content_container_margin_end">
+
+            <TextView
+                android:id="@+id/tv_news_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/news_text_margin_start"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_news_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/news_text_margin_start"
+                android:textSize="@dimen/text_description" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_news_image"
+            android:layout_width="@dimen/news_image_width"
+            android:layout_height="@dimen/news_image_height"
+            android:contentDescription="@string/desc_news_image"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
