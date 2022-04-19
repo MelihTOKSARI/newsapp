@@ -1,9 +1,10 @@
-package com.example.newsapp.ui.news
+package com.example.newsapp.repository
 
 import android.content.Context
 import android.net.Uri
 import androidx.fragment.app.Fragment
 import com.example.newsapp.R
+import com.example.newsapp.models.NewsItemViewModel
 import com.example.newsapp.utils.Utils
 import okhttp3.*
 import org.json.JSONException
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+// TODO Will be removed after retrofit library
 class NewsRequester(listener: Fragment) {
 
     interface NewsRequesterResponse {
@@ -49,7 +51,7 @@ class NewsRequester(listener: Fragment) {
 
             override fun onResponse(call: Call, response: Response) {
                 try {
-                    val newsListJSON = JSONObject(response.body()!!.string())
+                    val newsListJSON = JSONObject(response.body!!.string())
                     if(newsListJSON.getString(RESPONSE_STATUS_KEY) != RESPONSE_STATUS_OK_VALUE) {
                         responseListener.onRequestingNewsFailed("It is not available right now!")
                     }

@@ -2,7 +2,6 @@ package com.example.newsapp.adapter
 
 import android.annotation.SuppressLint
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,22 +9,26 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
-import com.example.newsapp.ui.news.NewsItemViewModel
+import com.example.newsapp.models.Article
 import com.squareup.picasso.Picasso
 
-class NewsAdapter(private var newsList: ArrayList<NewsItemViewModel>) :
-    RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
+
+    val newsList: ArrayList<Article> = arrayListOf()
+    private var onItemClickListener: ((Article) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateNewsList(newsList: ArrayList<NewsItemViewModel>) {
+    fun updateNewsList(newsList: ArrayList<Article>) {
         this.newsList.clear()
         this.newsList.addAll(newsList)
         this.notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Suppress("unused")
     fun clearNewsList() {
         this.newsList.clear()
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
@@ -40,25 +43,35 @@ class NewsAdapter(private var newsList: ArrayList<NewsItemViewModel>) :
 
         holder.titleView.text = newsItemViewModel.title
         holder.descriptionView.text = newsItemViewModel.description
-        Picasso.get().load(Uri.parse(newsItemViewModel.imageUrl)).into(holder.imageView)
+        if(newsItemViewModel.urlToImage != null) {
+            Picasso.get().load(Uri.parse(newsItemViewModel.urlToImage)).into(holder.imageView)
+        } else {
+            holder.imageView.setImageResource(R.drawable.ic_image_not_supported)
+        }
+        holder.authorView.text = newsItemViewModel.author
+        holder.dateView.text = newsItemViewModel.publishedAt
     }
 
     override fun getItemCount(): Int {
         return newsList.size
     }
 
-    class NewsHolder(newsItemView: View) : RecyclerView.ViewHolder(newsItemView), View.OnClickListener {
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
+    }
+
+    inner class NewsHolder(newsItemView: View) : RecyclerView.ViewHolder(newsItemView) {
 
         val titleView: TextView = newsItemView.findViewById(R.id.tv_news_title)
         val descriptionView: TextView = newsItemView.findViewById(R.id.tv_news_detail)
         val imageView: ImageView = newsItemView.findViewById(R.id.iv_news_image)
+        val authorView: TextView = newsItemView.findViewById(R.id.tv_article_author)
+        val dateView: TextView = newsItemView.findViewById(R.id.tv_article_date)
 
         init {
-            newsItemView.setOnClickListener(this)
-        }
-
-        override fun onClick(p0: View?) {
-            Log.d("NewsAdapter", "News is clicked")
+            newsItemView.setOnClickListener{
+                onItemClickListener?.invoke(newsList[adapterPosition])
+            }
         }
 
     }

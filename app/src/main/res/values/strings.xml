@@ -9,9 +9,13 @@
     <string name="description_news">News Fragment</string>
     <string name="description_favourites">Favourites Fragment</string>
 
+    <string name="error_search_news">Sorry, cannot load news right now</string>
+    <string name="hint_search_area">Search news…</string>
     <string name="message_search_news">Please search news by typing above area</string>
     <string name="message_news_not_found">Sorry, we cannot find any news about your search</string>
-    <string name="hint_search_area">Search news…</string>
+    <string name="message_article_saved">Article Saved Successfully</string>
+    <string name="message_article_removed">Article Removed Successfully</string>
 
     <string name="desc_news_image">Image</string>
+    <string name="description_save_article">Save Article</string>
 </resources>
