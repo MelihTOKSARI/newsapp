@@ -67,7 +67,7 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsRequester.NewsRequest
                 }
             )
         }
-
+        // throw RuntimeException("Test Crash")
         et_news_search.doOnTextChanged { text, _, _, _ ->
             searchHandler.removeCallbacks(searchRunnable)
             searchRunnable = Runnable {
